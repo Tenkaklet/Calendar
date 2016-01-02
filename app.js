@@ -19,15 +19,16 @@ calendarApp.controller('MyCtrl', function ($scope){
     var year = today.getFullYear();
     var month = today.getMonth();
 
-
     var range = CalendarRange.getMonthlyRange(new Date());
-    // console.log(range);
+
     $scope.firstDays = angular.forEach(range.days, function(days) {
-        // console.log(days);
+        $scope.today = days.day;
+        console.log($scope.today);
         $scope.dates = {
             year: days.year,
             day: days.day
         };
+
         var years = [];
         var then = year - 100;
         for(var i=then;i<=year;i++) {
@@ -35,7 +36,6 @@ calendarApp.controller('MyCtrl', function ($scope){
         }
         $scope.years = years;
         // console.log($scope.years);
-        console.log($scope.dates);
     });
 });
 

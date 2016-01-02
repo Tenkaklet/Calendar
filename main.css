@@ -10,3 +10,7 @@ header {
     display: inline-block;
     width: 200px;
 }
+.calendar-block {
+    padding: 20px;
+    outline: 1px solid #000;
+}
