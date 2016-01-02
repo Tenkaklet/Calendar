@@ -1,7 +1,7 @@
 <section class="container-fluid" id="calendar">
-    <div class="calendar-block">
-        <p>
-            {{today}}
+    <div class="calendar">
+        <p class="calendar-block" ng-repeat="date in dates | orderBy: 'day'">
+            {{date.day}}
         </p>
     </div>
 </section>

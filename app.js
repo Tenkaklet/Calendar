@@ -1,42 +1,83 @@
 var calendarApp = angular.module('calendarDemoApp', []);
 calendarApp.controller('MyCtrl', function ($scope){
 
-    $scope.months = {
-        0: 'January',
-        1: 'Febuary',
-        2: 'March',
-        3: 'April',
-        4: 'May',
-        5: 'June',
-        6: 'July',
-        7: 'August',
-        8: 'September',
-        9: 'October',
-        10: 'November',
-        11: 'December'
-    };
-    var today = new Date();
-    var year = today.getFullYear();
-    var month = today.getMonth();
+    $scope.months = [
+        {
+            'value': 0,
+            'label': 'January'
+        },
+        {
+            'value': 1,
+            'label': 'Febuary'
+        },
+        {
+            'value': 2,
+            'label': 'March'
+        },
+        {
+            'value': 3,
+            'label': 'April'
+        },
+        {
+            'value': 4,
+            'label': 'May'
+        },
+        {
+            'value': 5,
+            'label': 'June'
+        },
+        {
+            'value': 6,
+            'label': 'July'
+        },
+        {
+            'value': 7,
+            'label': 'August'
+        },
+        {
+            'value': 8,
+            'label': 'September'
+        },
+        {
+            'value': 9,
+            'label': 'October'
+        },
+        {
+            'value': 10,
+            'label': 'November'
+        },
+        {
+            'value': 11,
+            'label': 'December'
+        }
+
+    ];
+
+    //setting the current date using new Date();
+    var myDate = new Date();
+    // current year
+    $scope.years = [];
+    var year = myDate.getFullYear();
+    for (var i = 1996; i < year+ 1; i++) {
+        $scope.years.push(i);
+    }
 
     var range = CalendarRange.getMonthlyRange(new Date());
+    $scope.dates = [];
 
     $scope.firstDays = angular.forEach(range.days, function(days) {
-        $scope.today = days.day;
-        console.log($scope.today);
-        $scope.dates = {
+        $scope.myDate = days.day;
+
+        $scope.dates.push( {
             year: days.year,
             day: days.day
-        };
+        });
 
-        var years = [];
-        var then = year - 100;
-        for(var i=then;i<=year;i++) {
-            years.push(i);
-        }
-        $scope.years = years;
+
+
         // console.log($scope.years);
     });
+
 });
 
 
@@ -46,6 +87,6 @@ calendarApp.controller('MyCtrl', function ($scope){
 calendarApp.directive('theCalendar', function() {
     return {
         restrict: 'E',
-        templateUrl: 'calendar.html'
+        templateUrl: 'calendar.html',
     };
 });
