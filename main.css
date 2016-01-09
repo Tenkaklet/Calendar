@@ -10,3 +10,20 @@ header {
     display: inline-block;
     width: 200px;
 }
+.calendar {
+    margin: 10px;
+}
+.calendar-block {
+    padding: 20px;
+    width: 150px;
+    height: 150px;
+    margin: 0;
+    display: inline-block;
+    outline: 1px solid #000;
+}
+.pastday {
+    background-color: grey;
+}
+.currentDate {
+    background: #FFF;
+}

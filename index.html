@@ -9,10 +9,10 @@
 
 <header class="container-fluid">
     <nav>
-        <select class="form-control">
-            <option value="{{month}}" ng-repeat="month in months">{{month}}</option>
+        <select class="form-control" ng-model="selectedMonth">
+            <option value="{{month.value}}" ng-repeat="month in months">{{month.label}}</option>
         </select>
-        <select class="form-control">
+        <select class="form-control" ng-model="selectedYear">
             <option value="{{year}}" ng-repeat="year in years">{{year}}</option>
         </select>
     </nav>

@@ -1,42 +1,94 @@
 var calendarApp = angular.module('calendarDemoApp', []);
 calendarApp.controller('MyCtrl', function ($scope){
 
-    $scope.months = {
-        0: 'January',
-        1: 'Febuary',
-        2: 'March',
-        3: 'April',
-        4: 'May',
-        5: 'June',
-        6: 'July',
-        7: 'August',
-        8: 'September',
-        9: 'October',
-        10: 'November',
-        11: 'December'
-    };
-    var today = new Date();
-    var year = today.getFullYear();
-    var month = today.getMonth();
-
-
-    var range = CalendarRange.getMonthlyRange(new Date());
-    // console.log(range);
-    $scope.firstDays = angular.forEach(range.days, function(days) {
-        // console.log(days);
-        $scope.dates = {
-            year: days.year,
-            day: days.day
-        };
-        var years = [];
-        var then = year - 100;
-        for(var i=then;i<=year;i++) {
-            years.push(i);
+    $scope.months = [
+        {
+            'value': 0,
+            'label': 'January'
+        },
+        {
+            'value': 1,
+            'label': 'Febuary'
+        },
+        {
+            'value': 2,
+            'label': 'March'
+        },
+        {
+            'value': 3,
+            'label': 'April'
+        },
+        {
+            'value': 4,
+            'label': 'May'
+        },
+        {
+            'value': 5,
+            'label': 'June'
+        },
+        {
+            'value': 6,
+            'label': 'July'
+        },
+        {
+            'value': 7,
+            'label': 'August'
+        },
+        {
+            'value': 8,
+            'label': 'September'
+        },
+        {
+            'value': 9,
+            'label': 'October'
+        },
+        {
+            'value': 10,
+            'label': 'November'
+        },
+        {
+            'value': 11,
+            'label': 'December'
         }
-        $scope.years = years;
-        // console.log($scope.years);
-        console.log($scope.dates);
-    });
+
+    ];
+
+    //setting the current date using new Date();
+    var myDate = new Date();
+    // current year
+    $scope.years = [];
+    var year = myDate.getFullYear();
+    for (var i = year - 20; i < year+ 20; i++) {
+        $scope.years.push(i);
+    }
+    var range = CalendarRange.getMonthlyRange(new Date());
+    $scope.dates = [];
+    $scope.selectedYear = -1;
+    $scope.selectedMonth = -1;
+
+    var callback = function () {
+        if ($scope.selectedYear > -1 && $scope.selectedMonth > -1) {
+            var range = CalendarRange.getMonthlyRange(new Date("" + $scope.selectedYear + "-" + (parseInt($scope.selectedMonth) + 1)));
+            // ($scope.selectedYear + $scope.selectedMonth)
+            var tempDays = [];
+            angular.forEach(range.days, function(days) {
+                $scope.myDate = days.day;
+
+                tempDays.push( {
+                    currentMonth: days.month == $scope.selectedMonth,
+                    year: days.year,
+                    month: days.month,
+                    day: days.day
+                });
+            });
+            $scope.dates = tempDays;
+
+//use ng show or IF statemesnt to show the overlapping months. ng-class to show.
+        }
+    };
+    $scope.$watch('selectedYear', callback);
+    $scope.$watch('selectedMonth', callback);
+
 });
 
 
@@ -46,6 +98,6 @@ calendarApp.controller('MyCtrl', function ($scope){
 calendarApp.directive('theCalendar', function() {
     return {
         restrict: 'E',
-        templateUrl: 'calendar.html'
+        templateUrl: 'calendar.html',
     };
 });

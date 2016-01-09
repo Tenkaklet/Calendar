@@ -1,5 +1,7 @@
 <section class="container-fluid" id="calendar">
-    <p class="lead" ng-repeat="day in dates">
-        {{day}}
-    </p>
+    <div class="calendar">
+        <p class="calendar-block" ng-repeat="date in dates" ng-class="date.currentMonth == true ? 'currentDate' : 'pastday'">
+            {{date.day}}
+        </p>
+    </div>
 </section>
