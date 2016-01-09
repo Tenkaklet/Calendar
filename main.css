@@ -21,3 +21,9 @@ header {
     display: inline-block;
     outline: 1px solid #000;
 }
+.pastday {
+    background-color: grey;
+}
+.currentDate {
+    background: #FFF;
+}

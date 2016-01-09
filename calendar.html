@@ -1,6 +1,6 @@
 <section class="container-fluid" id="calendar">
     <div class="calendar">
-        <p class="calendar-block" ng-repeat="date in dates | orderBy: 'day'">
+        <p class="calendar-block" ng-repeat="date in dates" ng-class="date.currentMonth == true ? 'currentDate' : 'pastday'">
             {{date.day}}
         </p>
     </div>

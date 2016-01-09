@@ -58,25 +58,36 @@ calendarApp.controller('MyCtrl', function ($scope){
     // current year
     $scope.years = [];
     var year = myDate.getFullYear();
-    for (var i = 1996; i < year+ 1; i++) {
+    for (var i = year - 20; i < year+ 20; i++) {
         $scope.years.push(i);
     }
-
     var range = CalendarRange.getMonthlyRange(new Date());
     $scope.dates = [];
+    $scope.selectedYear = -1;
+    $scope.selectedMonth = -1;
 
-    $scope.firstDays = angular.forEach(range.days, function(days) {
-        $scope.myDate = days.day;
+    var callback = function () {
+        if ($scope.selectedYear > -1 && $scope.selectedMonth > -1) {
+            var range = CalendarRange.getMonthlyRange(new Date("" + $scope.selectedYear + "-" + (parseInt($scope.selectedMonth) + 1)));
+            // ($scope.selectedYear + $scope.selectedMonth)
+            var tempDays = [];
+            angular.forEach(range.days, function(days) {
+                $scope.myDate = days.day;
 
-        $scope.dates.push( {
-            year: days.year,
-            day: days.day
-        });
+                tempDays.push( {
+                    currentMonth: days.month == $scope.selectedMonth,
+                    year: days.year,
+                    month: days.month,
+                    day: days.day
+                });
+            });
+            $scope.dates = tempDays;
 
-
-
-        // console.log($scope.years);
-    });
+//use ng show or IF statemesnt to show the overlapping months. ng-class to show.
+        }
+    };
+    $scope.$watch('selectedYear', callback);
+    $scope.$watch('selectedMonth', callback);
 
 });
 

@@ -12,11 +12,9 @@
         <select class="form-control" ng-model="selectedMonth">
             <option value="{{month.value}}" ng-repeat="month in months">{{month.label}}</option>
         </select>
-        {{selectedMonth}}
         <select class="form-control" ng-model="selectedYear">
             <option value="{{year}}" ng-repeat="year in years">{{year}}</option>
         </select>
-        {{selectedYear}}
     </nav>
 </header>
 <the-calendar>
